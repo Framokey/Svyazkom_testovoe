@@ -7,10 +7,12 @@ import axios from "axios";
 
 const records = ref([]);
 const periods = ref([]);
+const tariffs = ref([]);
 const freePeriods = ref([]);
 
 const editing = ref(false);
 const id = ref();
+const period_id = ref();
 const recordInput = ref();
 const period = ref();
 const form = ref(null);
@@ -21,14 +23,20 @@ const getRecordsInfo = () => {
         .then((response) =>{
             records.value = response.data[0]
             periods.value = response.data[1]
+            tariffs.value = response.data[2]
 
             periods.value.forEach((value) => {
-                let tmp = records.value.find(record => record['period_id'] === value['id']);
-                if (tmp === undefined) {
-                    freePeriods.value.push({
-                        data : value,
-                        renderDate: new Date(value['end_date']).toLocaleString('default', { month: 'long', year: 'numeric' })
-                    })
+                const freeTariffDate = tariffs.value.find(tariff => tariff['period_id'] === value['id']);
+
+                if (freeTariffDate !== undefined) {
+                    if (! records.value.find(record => record['period_id'] === freeTariffDate['period_id']))
+                    {
+                        freePeriods.value.push({
+                            data : value,
+                            renderDate: new Date(value['end_date']).toLocaleString('default', { month: 'long', year: 'numeric' })
+                        })
+                    }
+
                 }
             })
         })
@@ -51,7 +59,6 @@ const createRecord = (values, { resetForm }) => {
         .post('/api/records', toCreateData)
         .then((response) => {
             records.value.unshift(response.data)
-            console.log(response.data)
             $('#recordFormModal').modal('hide');
             resetForm();
             period.value = null;
@@ -65,7 +72,8 @@ const addRecord = () => {
 };
 
 const editRecord = (record) => {
-    id.value = record['period_id']
+    id.value = record['id']
+    period_id.value = record['period_id']
     recordInput.value = record.amount_volume;
     editing.value = true;
     $('#recordFormModal').modal('show');
@@ -74,13 +82,12 @@ const editRecord = (record) => {
 const updateRecord = (values) => {
 
     const toCreateData = {
-        period_id: id.value,
+        period_id: period_id.value,
         amount_volume: values['record']
-    }
+    };
     console.log(toCreateData)
     axios.put('/api/records/' + id.value, toCreateData)
         .then((response) => {
-            console.log(response.data)
             const index = records.value.findIndex(record => record.id === response.data.id);
             records.value[index] = response.data;
             $('#recordFormModal').modal('hide');
@@ -97,9 +104,6 @@ const handleSubmit = (values, actions) => {
 
 onMounted(() => {
     getRecordsInfo()
-    // const date = new Date(2009, 10, 10);  // 2009-11-10
-    // const month = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-    // console.log(month);
 })
 
 </script>
@@ -150,6 +154,7 @@ onMounted(() => {
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
 

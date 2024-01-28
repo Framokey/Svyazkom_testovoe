@@ -23,7 +23,7 @@ class ResidentController extends Controller
     {
         return Resident::create([
             'fio' => request('fio'),
-            'area' => request('area'),
+            'area' => number_format(request('area'), 2,'.', ''),
         ]);
     }
 
@@ -53,7 +53,7 @@ class ResidentController extends Controller
 
         $resident->update([
             'fio' => request('fio'),
-            'area' => request('area'),
+            'area' => number_format(request('area'), 2,'.', ''),
         ]);
 
         return $resident;

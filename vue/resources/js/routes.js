@@ -1,18 +1,11 @@
-import Dashboard from "./components/Dashboard.vue";
 import ListResidents from "./pages/residents/ListResidents.vue";
-import UpdateSettings from "./pages/settings/UpdateSettings.vue";
-import UpdateProfile from "./pages/profile/UpdateProfile.vue";
 import Resident from "./pages/residents/Resident.vue";
 import PumpMeterRecords from "./pages/water_pump_records/PumpMeterRecords.vue";
 import Tariff from "./pages/tariff/Tariff.vue";
+import Info from "./pages/info/Info.vue";
+import DetailInfo from "./pages/info/DetailInfo.vue";
 
 export default [
-    {
-        path: '/admin/dashboard',
-        name: 'admin.dashboard',
-        component: Dashboard,
-    },
-
     {
         path: '/admin/residents',
         name: 'admin.residents',
@@ -21,20 +14,8 @@ export default [
 
     {
         path: '/admin/residents/:resident',
-        name: 'admin-residents-resident',
+        name: 'admin.residents.resident',
         component: Resident,
-    },
-
-    {
-        path: '/admin/settings',
-        name: 'admin.settings',
-        component: UpdateSettings,
-    },
-
-    {
-        path: '/admin/profile',
-        name: 'admin.profile',
-        component: UpdateProfile,
     },
 
     {
@@ -48,4 +29,16 @@ export default [
         name: 'admin.tariffs',
         component: Tariff,
     },
+
+    {
+        path: '/admin/info',
+        name: 'admin.info',
+        component: Info
+    },
+
+    {
+        path: '/admin/info/:period_id',
+        name: 'admin.info.detail',
+        component: DetailInfo
+    }
 ]

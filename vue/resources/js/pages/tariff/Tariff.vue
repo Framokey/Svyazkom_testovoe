@@ -25,7 +25,6 @@ const getTariffInfo = () => {
             periods.value.forEach((value) => {
                 let tmp = tariffs.value.find(tariffs => tariffs['period_id'] === value['id']);
                 if (tmp === undefined) {
-                    console.log(value)
                     freePeriods.value.push({
                         data : value,
                         renderDate: new Date(value['end_date']).toLocaleString('default', { month: 'long', year: 'numeric' })
@@ -64,6 +63,7 @@ const addTariff = () => {
 };
 
 const updateTariff = (values) => {
+    console.log(values)
     axios
         .put('/api/tariffs/' + id.value, values)
         .then((response) => {

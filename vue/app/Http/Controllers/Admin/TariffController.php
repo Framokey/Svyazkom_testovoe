@@ -23,7 +23,7 @@ class TariffController extends Controller
     {
         return Tariff::create([
             'period_id' => request('period_id'),
-            'tariff' => request('tariff'),
+            'tariff' => number_format(request('tariff'), 2,'.', '')
         ]);
     }
 
@@ -32,7 +32,7 @@ class TariffController extends Controller
     {
 
         $tariff->update([
-            'tariff' => request('tariff')
+            'tariff' => number_format(request('tariff'), 2,'.', '')
         ]);
 
         return $tariff;

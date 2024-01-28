@@ -25,37 +25,6 @@ onMounted(() => {
     getResidentInfo();
 })
 
-// import axios from 'axios';
-//
-// let id = window.location.href.split('/').slice(-1)[0]
-// console.log(id);
-// export default {
-//     data() {
-//         return {
-//             loading: false,
-//             resident: null,
-//             error: null,
-//         };
-//     },
-//     created() {
-//         this.fetchData();
-//     },
-//     methods: {
-//         fetchData() {
-//             this.error = this.users = null;
-//             this.loading = true;
-//             axios
-//                 .get('/api/residents/' + id)
-//                 .then(response => {
-//                     this.loading = false;
-//                     this.resident = response.data;
-//                 }).catch(error => {
-//                 this.loading = false;
-//                 this.error = error.response.data.message || error.message;
-//             });
-//         }
-//     }
-// }
 </script>
 <template>
     <div class="content-header">
@@ -68,7 +37,7 @@ onMounted(() => {
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">{{  }}</li>
+                        <li class="breadcrumb-item active">{{ residentFIO }}</li>
                     </ol>
                 </div>
             </div>
@@ -98,17 +67,7 @@ onMounted(() => {
                     </table>
                 </div>
             </div>
-<!--            <div class="loading-img" v-if="loading">-->
-<!--                <div id="load">-->
-<!--                    <div>G</div>-->
-<!--                    <div>N</div>-->
-<!--                    <div>I</div>-->
-<!--                    <div>D</div>-->
-<!--                    <div>A</div>-->
-<!--                    <div>O</div>-->
-<!--                    <div>L</div>-->
-<!--                </div>-->
-<!--            </div>-->
+
 <!--            <h1>{{ resident.fio }}</h1>-->
 <!--            <h2>{{ resident.area }}</h2>-->
 <!--            <div>Счета дачника:</div>-->

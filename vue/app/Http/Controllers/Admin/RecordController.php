@@ -16,14 +16,15 @@ class RecordController extends Controller
     {
         $periods = Period::all();
         $records = PumpMeterRecord::orderBy('id', 'desc')->get();
+        $tariffs = Tariff::all();
 
-        return array($records, $periods);
+        return array($records, $periods, $tariffs);
     }
 
     public function store()
     {
         $reqPeriodId = request('period_id');
-        $reqAmountVolume = request('amount_volume');
+        $reqAmountVolume = number_format(request('amount_volume'), 2,'.', '');
 
         $response = PumpMeterRecord::create([
             'period_id' => $reqPeriodId,
@@ -44,7 +45,7 @@ class RecordController extends Controller
         ]);
 
         $reqPeriodId = request('period_id');
-        $reqAmountVolume = request('amount_volume');
+        $reqAmountVolume = number_format(request('amount_volume'), 2,'.', '');
 
         $record->update([
             'amount_volume' => $reqAmountVolume,
@@ -57,7 +58,7 @@ class RecordController extends Controller
 
     protected function updateResidentBills($reqPeriodId, $reqAmountVolume, $update)
     {
-        $tariff = Tariff::where('period_id', $reqPeriodId)->first();
+        $tariff = Tariff::firstWhere('period_id', $reqPeriodId);
 
         $residents = Resident::all();
 

@@ -45,9 +45,9 @@ const addResident = () => {
 };
 
 const updateResident = (values) => {
-    axios.put('/api/residents/' + id.value, values)
+    axios
+        .put('/api/residents/' + id.value, values)
         .then((response) => {
-            console.log(response)
             const index = residents.value.findIndex(resident => resident.id === response.data.id);
             residents.value[index] = response.data;
             $('#residentFormModal').modal('hide');
@@ -130,7 +130,7 @@ onMounted(() => {
                             <th>{{ new Date(resident['start_date']).toLocaleString('default', { day: 'numeric', month: 'long', year: 'numeric' }) }}</th>
                             <th>{{ resident.fio }}</th>
                             <th>{{resident.area }}</th>
-                            <th><a href="#" @click.prevent="router.push({ name: 'admin-residents-resident', params: { resident : resident.fio } })"><i class="bi bi-person"></i></a></th>
+                            <th><a href="#" @click.prevent="router.push({ name: 'admin.residents.resident', params: { resident : resident.fio } })"><i class="bi bi-person"></i></a></th>
                             <th>
                                 <a href="#" @click.prevent="editResident(resident)"><i class="bi bi-pencil-square"></i></a>
                             </th>

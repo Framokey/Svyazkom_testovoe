@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Starter</title>
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="hold-transition sidebar-mini">
@@ -163,49 +162,58 @@
                     <a href="#" class="d-block">Alexander Pierce</a>
                 </div>
             </div>
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+                        <li class="nav-item">
+                            <router-link to="/admin/info" active-class="active" class="nav-link">
+                                <i class="nav-icon bi bi-people-fill"></i>
+                                <p>
+                                    Info
+                                </p>
+                            </router-link>
+                        </li>
 
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <router-link to="/admin/residents" active-class="active" class="nav-link">
+                                <i class="nav-icon bi bi-people-fill"></i>
+                                <p>
+                                    Residents
+                                </p>
+                            </router-link>
+                        </li>
 
-                    <li class="nav-item">
-                        <router-link to="/admin/residents" active-class="active" class="nav-link">
-                            <i class="nav-icon bi bi-people-fill"></i>
-                            <p>
-                                Residents
-                            </p>
-                        </router-link>
-                    </li>
+                        <li class="nav-item">
+                            <router-link to="/admin/tariffs" active-class="active" class="nav-link">
+                                <i class="nav-icon bi bi-clipboard2-pulse-fill"></i>
+                                <p>
+                                    Tariff
+                                </p>
+                            </router-link>
+                        </li>
 
-                    <li class="nav-item">
-                        <router-link to="/admin/tariffs" active-class="active" class="nav-link">
-                            <i class="nav-icon bi bi-clipboard2-pulse-fill"></i>
-                            <p>
-                                Tariff
-                            </p>
-                        </router-link>
-                    </li>
+                        <li class="nav-item">
+                            <router-link to="/admin/records" active-class="active" class="nav-link">
+                                <i class="nav-icon bi bi-file-bar-graph-fill"></i>
+                                <p>
+                                    WaterPumpRecords
+                                </p>
+                            </router-link>
+                        </li>
 
-                    <li class="nav-item">
-                        <router-link to="/admin/records" active-class="active" class="nav-link">
-                            <i class="nav-icon bi bi-file-bar-graph-fill"></i>
-                            <p>
-                                WaterPumpRecords
-                            </p>
-                        </router-link>
-                    </li>
+                        <li class="nav-item">
 
-                    <li class="nav-item">
-                        <router-link to="/admin/" active-class="active" class="nav-link">
-                            <i class="nav-icon fas fa-sign-out-alt"></i>
-                            <p>
-                                Logout
-                            </p>
-                        </router-link>
-                    </li>
+                            <a href="{{ route('logout') }}" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
+                        </li>
 
-                </ul>
-            </nav>
+                    </ul>
+                </nav>
+
         </div>
 
     </aside>
