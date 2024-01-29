@@ -17,7 +17,7 @@ composer install
 npm install  
 php artisan migrate  
 
-Также необходимо раскомментировать(убрать ; в начале строки) следующие строки в файле (папкпа установки php)/php.ini:
+Также необходимо раскомментировать(убрать ; в начале строки) следующие строки в файле (папкпа установки php)/php.ini:  
 extension=fileinfo  
 extension=pgsql  
 
