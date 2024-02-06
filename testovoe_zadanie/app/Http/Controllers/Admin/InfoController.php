@@ -31,11 +31,15 @@ class InfoController extends Controller
         $tariff = Tariff::firstWhere('period_id', $period_id);
         $record = PumpMeterRecord::firstWhere('period_id', $period_id);
 
+        $residentsDB = Resident::all();
         $bills = Bill::where('period_id', $period_id)->get();
-        $residents = Resident::all();
+        $residents = [];
 
 
-
+        foreach ($bills as $bill)
+        {
+            array_push($residents, $residentsDB->firstWhere('id', $bill['resident_id']));
+        }
 
         return array($period, $tariff, $record, $bills, $residents);
     }

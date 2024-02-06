@@ -45,34 +45,40 @@ class TariffController extends Controller
         }
 
         return $tariff;
+
     }
 
     public function updateResidentBills($reqAmountVolume, $tariff)
     {
-
         $reqPeriodId = Period::firstWhere('id', $tariff['period_id'])['id'];
-        $residents = Resident::all();
+        $bills = Bill::all()->where('period_id', $reqPeriodId);
+        $residentsDB = Resident::all();
 
         $fullArea = 0;
         $amoutRub = $tariff->tariff * $reqAmountVolume;
+        $residents = [];
 
-
-        foreach($residents as $resident)
+        foreach($bills as $bill)
         {
-            $fullArea += $resident->area;
+
+            $resident = $residentsDB->firstWhere('id', $bill['resident_id']);
+
+            $fullArea += $resident['area'];
+            array_push($residents, $resident);
+
         }
 
-        $bills = Bill::all();
         foreach ($residents as $resident)
         {
             $billAmountRub = round(($amoutRub / $fullArea) * $resident->area, 2);
 
-            $bill = $bills->where( 'resident_id', $resident->id)->where('period_id', $reqPeriodId)->first();
+            $bill = $bills->where('resident_id', $resident->id)->where('period_id', $reqPeriodId)->first();
 
             $bill->update([
                 'amount_rub' => $billAmountRub
             ]);
         }
+
     }
 
 }

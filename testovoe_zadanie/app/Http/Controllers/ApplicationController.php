@@ -11,7 +11,6 @@ class ApplicationController extends Controller
 {
     public function __invoke()
     {
-        $user = auth()->user();
-        return view('admin.layouts.app', ['user' => $user]);
+        return view('app');
     }
 }

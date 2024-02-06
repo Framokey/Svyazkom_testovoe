@@ -68,7 +68,6 @@ const updateTariff = (values) => {
     axios
         .put('/api/tariffs/' + id.value, values)
         .then((response) => {
-            console.log(response.data)
             const index = tariffs.value.findIndex(tariffs => tariffs.id === response.data.id);
             tariffs.value[index] = response.data;
             $('#tariffFormModal').modal('hide');
