@@ -1,5 +1,7 @@
 # Svyazkom_testovoe
 
+После запуска проекта, можно написать команду "php artisan db:seed", которая заполнит таблицу residents 10 значениями(это можно настроить в файлу ./database/seeders/DatabaseSeeder.php).
+
 Для корректной работы необходимо следующее:  
 
 node js;  

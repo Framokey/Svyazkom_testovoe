@@ -127,9 +127,9 @@ onMounted(() => {
                         <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Дата регистрации</th>
                             <th>ФИО</th>
                             <th>Площадь участка</th>
+                            <th>Дата регистрации</th>
                             <th>Перейти</th>
                             <th>Редактироовать</th>
                             <th>Удаление</th>
@@ -138,9 +138,9 @@ onMounted(() => {
                         <tbody>
                         <tr v-for="(resident, index) in residents" :key="resident.id">
                             <th>{{ index + 1 }}</th>
-                            <th>{{ new Date(resident['start_date']).toLocaleString('default', { day: 'numeric', month: 'long', year: 'numeric' }) }}</th>
                             <th>{{ resident.fio }}</th>
                             <th>{{resident.area }} м<sup>3</sup></th>
+                            <th>{{ new Date(resident['start_date']).toLocaleString('default', { day: 'numeric', month: 'long', year: 'numeric' }) }}</th>
                             <th><a href="#" @click.prevent="router.push({ name: 'admin.residents.resident', params: { resident : resident.fio } })"><i class="bi bi-person"></i></a></th>
                             <th>
                                 <a href="#" @click.prevent="editResident(resident)"><i class="bi bi-pencil-square"></i></a>

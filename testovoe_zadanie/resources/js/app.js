@@ -11,13 +11,19 @@ import 'admin-lte/dist/js/adminlte.min.js';
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import Routes from './routes.js'
+import AdminLayout from "./pages/admin/AdminLayout.vue";
+import { createPinia } from "pinia";
+import { useAuthUserStore } from "./stores/AuthUserStore.js";
+import App from "./App.vue";
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
+const pinia = createPinia();
+const app = createApp(App);
 
-const app = createApp({});
+// app.component('prop-user-name', AdminLayout);
 
 const router = createRouter({
     routes: Routes,
@@ -25,6 +31,15 @@ const router = createRouter({
 
 })
 
+router.beforeEach(async (to, from) => {
+    const authUserStore = useAuthUserStore()
+    if (authUserStore.user.name === '' && to.name !== 'login' && to.name !== 'register')
+    {
+        await Promise.all([authUserStore.getAuthUser()])
+    }
+});
+
+app.use(pinia)
 app.use(router)
 
 
